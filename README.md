@@ -2,4 +2,4 @@
 ### Авдиенко Данила (464919)
 
 - [x] [Лабораторная работа №1](https://github.com/danya369/cloud-Itmo25/blob/main/lab1/README.md)
-- [x] [Лабораторная работа №2](#)
+- [x] [Лабораторная работа №2](https://github.com/danya369/cloud-Itmo25/blob/main/lab2/README.md)
