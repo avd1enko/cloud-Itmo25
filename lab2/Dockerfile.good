@@ -19,5 +19,6 @@ COPY --chown=appuser:appgroup app.py /app/app.py
 USER appuser
 
 # ENV SECRET_KEY="12345-super-secret" - удаляем из кода и храним такие данные в специальных внешних менеджерах
-
+#отключает буферизацию вывода Python, и все print() начинают отображаться моментально
+ENV PYTHONUNBUFFERED=1
 CMD ["python3", "app.py"]
