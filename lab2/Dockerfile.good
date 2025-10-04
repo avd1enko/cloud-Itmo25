@@ -1,0 +1,23 @@
+# Good-practice! мы используем конкретную версию образа - это обеспечивает стабильность зависимостей (пакетов, путей и библиотек)
+FROM ubuntu:22.04
+
+# Good-practice! Мы соединили все команды в одну и избавились от лишних слоев
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 \
+        curl \
+        vim && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+WORKDIR /app
+
+# Good-practice! создаем группу appgroup, создаем юзера и добавляем его в эту группу. -r - флаг системной группы пользователей -g - добавляем в группу пользователя
+RUN groupadd -r appgroup && useradd -r -g appgroup appuser
+# копируем файл app.py из нашего вымышленного проекта в контейнер и меняем владельца на созданного юзера, чтобы тот мог на них влиять
+COPY --chown=appuser:appgroup app.py /app/app.py 
+# устанавливаем юзера по умолчанию для всех последующих операций.
+USER appuser
+
+# ENV SECRET_KEY="12345-super-secret" - удаляем из кода и храним такие данные в специальных внешних менеджерах
+
+CMD ["python3", "app.py"]
